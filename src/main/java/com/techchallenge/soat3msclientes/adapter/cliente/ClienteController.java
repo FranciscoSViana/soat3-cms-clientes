@@ -1,17 +1,17 @@
 package com.techchallenge.soat3msclientes.adapter.cliente;
 
 import com.techchallenge.soat3msclientes.adapter.cliente.model.ClienteContentResponse;
+import com.techchallenge.soat3msclientes.adapter.cliente.model.ClienteRequest;
 import com.techchallenge.soat3msclientes.adapter.cliente.model.ClienteResponse;
-import com.techchallenge.soat3msclientes.application.cliente.usecase.BuscarClientePorCPFUseCase;
-import com.techchallenge.soat3msclientes.application.cliente.usecase.ListarClientesUseCase;
+import com.techchallenge.soat3msclientes.application.cliente.usecase.*;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("v1/clientes")
@@ -21,6 +21,12 @@ public class ClienteController {
     private final ListarClientesUseCase listarClientesUseCase;
 
     private final BuscarClientePorCPFUseCase buscarClientePorCPFUseCase;
+
+    private final SalvarClienteUseCase salvarClienteUseCase;
+
+    private final AtualizarClienteUseCase atualizarClienteUseCase;
+
+    private final ExcluirClienteUseCase excluirClienteUseCase;
 
     @GetMapping
     public ResponseEntity<ClienteContentResponse> todosClientes() {
@@ -37,5 +43,27 @@ public class ClienteController {
 
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping
+    public ResponseEntity<ClienteResponse> salvarCliente(@RequestBody @Valid ClienteRequest clienteRequest) {
+
+        ClienteResponse clienteSalvo = salvarClienteUseCase.salvar(clienteRequest);
+
+        return ResponseEntity.ok(clienteSalvo);
+    }
+
+    @PutMapping("/{clienteId}")
+    public ResponseEntity<ClienteResponse> atualizar(@PathVariable UUID clienteId, @RequestBody ClienteRequest clienteRequest) {
+
+        ClienteResponse response = atualizarClienteUseCase.atualizar(clienteId, clienteRequest);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{clienteId}")
+    public void excluirCliente(@PathVariable UUID clienteId) {
+        excluirClienteUseCase.excluirCliente(clienteId);
+    }
+
 
 }
