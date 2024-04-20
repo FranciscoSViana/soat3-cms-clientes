@@ -41,7 +41,7 @@ public class ClienteServiceImpl implements ClienteService {
     public ClienteResponse buscarPorCpf(String cpf) {
 
         ClienteModel cliente = Optional.ofNullable(clienteRepository.findByCpf(cpf))
-                .orElseThrow(() -> new NegocioException(I18n.CLIENTE_NAO_ENCONTRADO_PARA_O_CPF + cpf));
+                .orElseThrow(() -> new ClienteNaoEncontradoException(I18n.CLIENTE_NAO_ENCONTRADO_PARA_O_CPF + cpf));
 
         return clienteMapper.clienteToClienteModel(cliente);
 
