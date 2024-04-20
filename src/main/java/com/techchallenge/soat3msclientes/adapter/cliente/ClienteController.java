@@ -18,20 +18,13 @@ import java.util.UUID;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class ClienteController {
 
-    private final ListarClientesUseCase listarClientesUseCase;
+    private final ClienteUseCase clienteUseCase;
 
-    private final BuscarClientePorCPFUseCase buscarClientePorCPFUseCase;
-
-    private final SalvarClienteUseCase salvarClienteUseCase;
-
-    private final AtualizarClienteUseCase atualizarClienteUseCase;
-
-    private final ExcluirClienteUseCase excluirClienteUseCase;
 
     @GetMapping
     public ResponseEntity<ClienteContentResponse> todosClientes() {
 
-        ClienteContentResponse clienteContentResponse = listarClientesUseCase.buscarTodos();
+        ClienteContentResponse clienteContentResponse = clienteUseCase.buscarTodos();
 
         return new ResponseEntity<>(clienteContentResponse, HttpStatus.OK);
     }
@@ -39,7 +32,7 @@ public class ClienteController {
     @GetMapping("/{cpf}")
     public ResponseEntity<ClienteResponse> buscarPorCpf(@PathVariable("cpf") String cpf) {
 
-        ClienteResponse response = buscarClientePorCPFUseCase.buscarPorCpf(cpf);
+        ClienteResponse response = clienteUseCase.buscarPorCpf(cpf);
 
         return ResponseEntity.ok(response);
     }
@@ -47,7 +40,7 @@ public class ClienteController {
     @PostMapping
     public ResponseEntity<ClienteResponse> salvarCliente(@RequestBody @Valid ClienteRequest clienteRequest) {
 
-        ClienteResponse clienteSalvo = salvarClienteUseCase.salvar(clienteRequest);
+        ClienteResponse clienteSalvo = clienteUseCase.salvar(clienteRequest);
 
         return ResponseEntity.ok(clienteSalvo);
     }
@@ -55,14 +48,14 @@ public class ClienteController {
     @PutMapping("/{clienteId}")
     public ResponseEntity<ClienteResponse> atualizar(@PathVariable UUID clienteId, @RequestBody ClienteRequest clienteRequest) {
 
-        ClienteResponse response = atualizarClienteUseCase.atualizar(clienteId, clienteRequest);
+        ClienteResponse response = clienteUseCase.atualizar(clienteId, clienteRequest);
 
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{clienteId}")
     public void excluirCliente(@PathVariable UUID clienteId) {
-        excluirClienteUseCase.excluirCliente(clienteId);
+        clienteUseCase.excluirCliente(clienteId);
     }
 
 
