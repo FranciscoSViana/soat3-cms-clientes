@@ -1,11 +1,10 @@
 package com.techchallenge.soat3msclientes.adapter.cliente.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.UUID;
+@Getter
+@Setter
 @Data
 @Builder
 @AllArgsConstructor
