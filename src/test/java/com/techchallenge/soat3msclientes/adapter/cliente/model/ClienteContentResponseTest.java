@@ -70,7 +70,7 @@ public class ClienteContentResponseTest {
         UUID uuidCliente2 = UUID.fromString("550e8400-e29b-41d4-a716-446655440044");
 
         ClienteResponse cliente1 = ClienteResponse.builder()
-                .uuid(uuidCliente1)
+                .id(uuidCliente1)
                 .nome("João")
                 .email("jp@teste.br")
                 .telefone("32138586")
@@ -78,7 +78,7 @@ public class ClienteContentResponseTest {
                 .build();
 
         ClienteResponse cliente2 = ClienteResponse.builder()
-                .uuid(uuidCliente2)
+                .id(uuidCliente2)
                 .nome("Maria")
                 .email("mr@teste.br")
                 .telefone("654658158")

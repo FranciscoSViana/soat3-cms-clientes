@@ -17,14 +17,14 @@ public class ClienteRequestTest {
         String telefone = "123456789";
 
         ClienteRequest clienteRequest = ClienteRequest.builder()
-                .uuid(uuid)
+                .id(uuid)
                 .nome(nome)
                 .cpf(cpf)
                 .email(email)
                 .telefone(telefone)
                 .build();
 
-        assertEquals(uuid, clienteRequest.getUuid());
+        assertEquals(uuid, clienteRequest.getId());
         assertEquals(nome, clienteRequest.getNome());
         assertEquals(cpf, clienteRequest.getCpf());
         assertEquals(email, clienteRequest.getEmail());
@@ -41,7 +41,7 @@ public class ClienteRequestTest {
 
         ClienteRequest clienteRequest = new ClienteRequest(uuid, nome, cpf, email, telefone);
 
-        assertEquals(uuid, clienteRequest.getUuid());
+        assertEquals(uuid, clienteRequest.getId());
         assertEquals(nome, clienteRequest.getNome());
         assertEquals(cpf, clienteRequest.getCpf());
         assertEquals(email, clienteRequest.getEmail());
@@ -57,7 +57,7 @@ public class ClienteRequestTest {
         String telefone = "123987456";
 
         ClienteRequest clienteRequest = ClienteRequest.builder()
-                .uuid(uuid)
+                .id(uuid)
                 .nome(nome)
                 .cpf(cpf)
                 .email(email)
@@ -82,7 +82,7 @@ public class ClienteRequestTest {
         String telefone2 = "987654321";
 
         ClienteRequest clienteRequest1 = ClienteRequest.builder()
-                .uuid(uuid1)
+                .id(uuid1)
                 .nome(nome1)
                 .cpf(cpf1)
                 .email(email1)
@@ -90,7 +90,7 @@ public class ClienteRequestTest {
                 .build();
 
         ClienteRequest clienteRequest2 = ClienteRequest.builder()
-                .uuid(uuid1)
+                .id(uuid1)
                 .nome(nome1)
                 .cpf(cpf1)
                 .email(email1)
@@ -98,7 +98,7 @@ public class ClienteRequestTest {
                 .build();
 
         ClienteRequest clienteRequest3 = ClienteRequest.builder()
-                .uuid(uuid2)
+                .id(uuid2)
                 .nome(nome2)
                 .cpf(cpf2)
                 .email(email2)
@@ -128,13 +128,13 @@ public class ClienteRequestTest {
 
         ClienteRequest clienteRequest = new ClienteRequest();
 
-        clienteRequest.setUuid(uuid);
+        clienteRequest.setId(uuid);
         clienteRequest.setNome(nome);
         clienteRequest.setCpf(cpf);
         clienteRequest.setEmail(email);
         clienteRequest.setTelefone(telefone);
 
-        assertEquals(uuid, clienteRequest.getUuid());
+        assertEquals(uuid, clienteRequest.getId());
         assertEquals(nome, clienteRequest.getNome());
         assertEquals(cpf, clienteRequest.getCpf());
         assertEquals(email, clienteRequest.getEmail());

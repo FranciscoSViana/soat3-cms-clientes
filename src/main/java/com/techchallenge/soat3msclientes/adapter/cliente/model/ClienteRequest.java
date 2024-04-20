@@ -11,7 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class ClienteRequest {
 
-    private UUID uuid;
+    private UUID id;
     private String nome;
     private String cpf;
     private String email;

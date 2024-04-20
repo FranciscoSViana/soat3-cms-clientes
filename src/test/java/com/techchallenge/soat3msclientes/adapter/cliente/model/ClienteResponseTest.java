@@ -19,14 +19,14 @@ public class ClienteResponseTest {
         String telefone = "123456789";
 
         ClienteResponse clienteResponse = ClienteResponse.builder()
-                .uuid(uuid)
+                .id(uuid)
                 .nome(nome)
                 .cpf(cpf)
                 .email(email)
                 .telefone(telefone)
                 .build();
 
-        assertEquals(uuid, clienteResponse.getUuid());
+        assertEquals(uuid, clienteResponse.getId());
         assertEquals(nome, clienteResponse.getNome());
         assertEquals(cpf, clienteResponse.getCpf());
         assertEquals(email, clienteResponse.getEmail());
@@ -43,7 +43,7 @@ public class ClienteResponseTest {
 
         ClienteResponse clienteResponse = new ClienteResponse(uuid, nome, cpf, email, telefone);
 
-        assertEquals(uuid, clienteResponse.getUuid());
+        assertEquals(uuid, clienteResponse.getId());
         assertEquals(nome, clienteResponse.getNome());
         assertEquals(cpf, clienteResponse.getCpf());
         assertEquals(email, clienteResponse.getEmail());
@@ -59,7 +59,7 @@ public class ClienteResponseTest {
         String telefone = "123987456";
 
         ClienteResponse clienteResponse = ClienteResponse.builder()
-                .uuid(uuid)
+                .id(uuid)
                 .nome(nome)
                 .cpf(cpf)
                 .email(email)
@@ -84,7 +84,7 @@ public class ClienteResponseTest {
         String telefone2 = "987654321";
 
         ClienteResponse clienteResponse1 = ClienteResponse.builder()
-                .uuid(uuid1)
+                .id(uuid1)
                 .nome(nome1)
                 .cpf(cpf1)
                 .email(email1)
@@ -92,7 +92,7 @@ public class ClienteResponseTest {
                 .build();
 
         ClienteResponse clienteResponse2 = ClienteResponse.builder()
-                .uuid(uuid1)
+                .id(uuid1)
                 .nome(nome1)
                 .cpf(cpf1)
                 .email(email1)
@@ -100,7 +100,7 @@ public class ClienteResponseTest {
                 .build();
 
         ClienteResponse clienteResponse3 = ClienteResponse.builder()
-                .uuid(uuid2)
+                .id(uuid2)
                 .nome(nome2)
                 .cpf(cpf2)
                 .email(email2)
@@ -137,13 +137,13 @@ public class ClienteResponseTest {
 
         ClienteResponse clienteResponse = new ClienteResponse();
 
-        clienteResponse.setUuid(uuid);
+        clienteResponse.setId(uuid);
         clienteResponse.setNome(nome);
         clienteResponse.setCpf(cpf);
         clienteResponse.setEmail(email);
         clienteResponse.setTelefone(telefone);
 
-        assertEquals(uuid, clienteResponse.getUuid());
+        assertEquals(uuid, clienteResponse.getId());
         assertEquals(nome, clienteResponse.getNome());
         assertEquals(cpf, clienteResponse.getCpf());
         assertEquals(email, clienteResponse.getEmail());

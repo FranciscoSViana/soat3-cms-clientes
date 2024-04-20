@@ -29,7 +29,7 @@ public class ClienteMapper {
 
     public ClienteResponse clienteToClienteResponse(ClienteModel clienteModel) {
         return ClienteResponse.builder()
-                .uuid(clienteModel.getId())
+                .id(clienteModel.getId())
                 .nome(clienteModel.getNome())
                 .cpf(clienteModel.getCpf())
                 .email(clienteModel.getEmail())
