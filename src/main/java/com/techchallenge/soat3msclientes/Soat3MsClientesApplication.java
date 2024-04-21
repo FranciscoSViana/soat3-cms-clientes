@@ -3,6 +3,7 @@ package com.techchallenge.soat3msclientes;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 @SpringBootApplication
 public class Soat3MsClientesApplication {
 

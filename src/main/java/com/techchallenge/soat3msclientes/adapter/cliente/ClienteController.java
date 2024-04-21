@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("v1/clientes")
+@RequestMapping("/v1/clientes")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class ClienteController {
 
