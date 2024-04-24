@@ -52,7 +52,7 @@ public class ClienteRepositoryIT {
 
     @Test
     public void testFindById() {
-        String uuidJoaoSilva = "0a2f5e67-8b3d-4c6a-a1b2-987654321000";
+        String uuidJoaoSilva = "5a39b3b5-4675-4c67-8dcb-3e59e38e36c1";
 
         Optional<ClienteModel> clienteOptional = clienteRepository.findById(UUID.fromString(uuidJoaoSilva));
         assertTrue(clienteOptional.isPresent());
