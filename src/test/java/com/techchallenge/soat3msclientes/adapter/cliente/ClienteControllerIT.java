@@ -36,11 +36,9 @@ public class ClienteControllerIT {
 
     @Test
     void deveriaRetornarListaDeClientesQuandoSolicitado() throws Exception {
-        // Dado
         ClienteContentResponse response = ClienteContentResponse.builder().content(Collections.emptyList()).build();
         when(clienteUseCase.buscarTodos()).thenReturn(response);
 
-        // Quando/Então
         mockMvc.perform(get("/v1/clientes"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -50,12 +48,10 @@ public class ClienteControllerIT {
 
     @Test
     void deveriaRetornarClienteQuandoSolicitadoPorCpf() throws Exception {
-        // Dado
         String cpf = "12345678901";
         ClienteResponse response = ClienteResponse.builder().id(UUID.randomUUID()).nome("John Doe").cpf(cpf).build();
         when(clienteUseCase.buscarPorCpf(cpf)).thenReturn(response);
 
-        // Quando/Então
         mockMvc.perform(get("/v1/clientes/{cpf}", cpf))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -66,12 +62,10 @@ public class ClienteControllerIT {
 
     @Test
     void deveriaSalvarClienteQuandoSolicitado() throws Exception {
-        // Dado
         ClienteRequest request = ClienteRequest.builder().nome("John Doe").cpf("12345678901").build();
         ClienteResponse response = ClienteResponse.builder().id(UUID.randomUUID()).nome("John Doe").cpf("12345678901").build();
         when(clienteUseCase.salvar(any(ClienteRequest.class))).thenReturn(response);
 
-        // Quando/Então
         mockMvc.perform(post("/v1/clientes")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
@@ -84,13 +78,11 @@ public class ClienteControllerIT {
 
     @Test
     void deveriaAtualizarClienteQuandoSolicitado() throws Exception {
-        // Dado
         UUID id = UUID.randomUUID();
         ClienteRequest request = ClienteRequest.builder().nome("John Doe").cpf("12345678901").build();
         ClienteResponse response = ClienteResponse.builder().id(id).nome("John Doe").cpf("12345678901").build();
         when(clienteUseCase.atualizar(any(UUID.class), any(ClienteRequest.class))).thenReturn(response);
 
-        // Quando/Então
         mockMvc.perform(put("/v1/clientes/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
@@ -103,10 +95,8 @@ public class ClienteControllerIT {
 
     @Test
     void deveriaExcluirClienteQuandoSolicitado() throws Exception {
-        // Dado
         UUID id = UUID.randomUUID();
 
-        // Quando/Então
         mockMvc.perform(delete("/v1/clientes/{id}", id))
                 .andExpect(status().isOk());
     }
