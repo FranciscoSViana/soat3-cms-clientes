@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 public class DefinicaoPassos {
@@ -48,10 +47,8 @@ public class DefinicaoPassos {
         listaClientes.add(ClienteModel.builder().id(UUID.randomUUID()).nome("Cliente 1").cpf("12345678901").build());
         listaClientes.add(ClienteModel.builder().id(UUID.randomUUID()).nome("Cliente 2").cpf("98765432109").build());
 
-        // Mocking the behavior of ClienteRepository
         when(clienteRepository.findAll()).thenReturn(listaClientes);
 
-        // Creating expected response for comparison
         List<ClienteResponse> clienteResponses = listaClientes.stream()
                 .map(clienteMapper::clienteToClienteResponse)
                 .collect(Collectors.toList());
@@ -60,42 +57,30 @@ public class DefinicaoPassos {
 
     @Quando("eu busco um cliente pelo CPF {string}")
     public void euBuscoUmClientePeloCPF(String cpf) {
-        // Criando um cliente com o CPF fornecido
         ClienteModel cliente = ClienteModel.builder().id(UUID.randomUUID()).nome("Cliente Teste").cpf(cpf).build();
 
-        // Criando um ClienteResponse com os detalhes do cliente
         ClienteResponse clienteResponse = ClienteResponse.builder()
                 .id(cliente.getId())
                 .nome(cliente.getNome())
                 .cpf(cliente.getCpf()) // Passando o CPF corretamente
                 .build();
 
-        // Mocking the behavior of ClienteRepository to return the client with the specified CPF
         when(clienteRepository.findByCpf(cpf)).thenReturn(cliente);
 
-        // Mocking the behavior of ClienteMapper to map the ClienteModel to ClienteResponse
         when(clienteMapper.clienteToClienteResponse(cliente)).thenReturn(clienteResponse);
 
-        // Mocking the behavior of ClienteService to return the client response
         when(clienteService.buscarPorCpf(cpf)).thenReturn(clienteResponse);
     }
 
 
     @Então("o cliente com o CPF {string} deve ser retornado com sucesso")
     public void oClienteComOCPFSerRetornadoComSucesso(String cpf) {
-        // Construindo o cliente esperado com o CPF especificado
         ClienteModel clienteEsperado = clienteRepository.findByCpf(cpf);
         ClienteResponse clienteResponseEsperado = clienteMapper.clienteToClienteResponse(clienteEsperado);
-
-        // Construindo o expectedResponse contendo apenas o cliente esperado
         List<ClienteResponse> clienteResponseList = new ArrayList<>();
         clienteResponseList.add(clienteResponseEsperado);
         ClienteContentResponse expectedResponse = ClienteContentResponse.builder().content(clienteResponseList).build();
-
-        // Obtendo a resposta atual a partir da chamada do método
         ClienteResponse response = clienteService.buscarPorCpf(cpf);
-
-        // Verificando se a resposta atual corresponde à resposta esperada
         Assertions.assertEquals(expectedResponse.getContent().get(0), response);
     }
 
