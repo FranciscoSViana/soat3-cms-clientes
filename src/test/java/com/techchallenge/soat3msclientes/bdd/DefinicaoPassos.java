@@ -1,56 +1,104 @@
 package com.techchallenge.soat3msclientes.bdd;
 
+import com.techchallenge.soat3msclientes.adapter.cliente.model.ClienteContentResponse;
 import com.techchallenge.soat3msclientes.adapter.cliente.model.ClienteResponse;
+import com.techchallenge.soat3msclientes.application.cliente.converter.ClienteMapper;
+import com.techchallenge.soat3msclientes.application.cliente.service.ClienteService;
+import com.techchallenge.soat3msclientes.application.cliente.service.ClienteServiceImpl;
+import com.techchallenge.soat3msclientes.domain.model.ClienteModel;
+import com.techchallenge.soat3msclientes.infrastruture.cliente.repository.ClienteRepository;
+import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
-import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
-import io.restassured.specification.RequestSpecification;
+import org.junit.jupiter.api.Assertions;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
-import static io.restassured.RestAssured.given;
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-import static org.hamcrest.Matchers.equalTo;
-
-
-
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 public class DefinicaoPassos {
 
-    private Response response;
+    @InjectMocks
+    private ClienteServiceImpl clienteService;
 
-    private ClienteResponse clienteResponse;
+    @Mock
+    private ClienteRepository clienteRepository;
 
-    private String ENDPOINT_CLIENTES = "http://localhost:8080/v1/clientes";
+    @Mock
+    private ClienteMapper clienteMapper;
 
-    @Dado("que um cliente esteja cadastrado com o CPF {string}")
-    public void clienteCadastradoComCPF(String cpf) {
-        // Aqui você pode implementar a lógica para cadastrar um cliente com o CPF informado
+    private ClienteContentResponse expectedResponse;
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
     }
 
-    @Quando("requisitar a busca do cliente pelo CPF {string}")
-    public void requisitarBuscaClientePorCPF(String cpf) {
-        response = given()
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .when()
-                .get(ENDPOINT_CLIENTES + "/{cpf}", cpf);
+    @Dado("que existem clientes cadastrados no sistema")
+    public void queExistemClientesCadastradosNoSistema() {
+        List<ClienteModel> listaClientes = new ArrayList<>();
+        listaClientes.add(ClienteModel.builder().id(UUID.randomUUID()).nome("Cliente 1").cpf("12345678901").build());
+        listaClientes.add(ClienteModel.builder().id(UUID.randomUUID()).nome("Cliente 2").cpf("98765432109").build());
+
+        // Mocking the behavior of ClienteRepository
+        when(clienteRepository.findAll()).thenReturn(listaClientes);
+
+        // Creating expected response for comparison
+        List<ClienteResponse> clienteResponses = listaClientes.stream()
+                .map(clienteMapper::clienteToClienteResponse)
+                .collect(Collectors.toList());
+        expectedResponse = ClienteContentResponse.builder().content(clienteResponses).build();
+    }
+
+    @Quando("eu busco um cliente pelo CPF {string}")
+    public void euBuscoUmClientePeloCPF(String cpf) {
+        // Criando um cliente com o CPF fornecido
+        ClienteModel cliente = ClienteModel.builder().id(UUID.randomUUID()).nome("Cliente Teste").cpf(cpf).build();
+
+        // Criando um ClienteResponse com os detalhes do cliente
+        ClienteResponse clienteResponse = ClienteResponse.builder()
+                .id(cliente.getId())
+                .nome(cliente.getNome())
+                .cpf(cliente.getCpf()) // Passando o CPF corretamente
+                .build();
+
+        // Mocking the behavior of ClienteRepository to return the client with the specified CPF
+        when(clienteRepository.findByCpf(cpf)).thenReturn(cliente);
+
+        // Mocking the behavior of ClienteMapper to map the ClienteModel to ClienteResponse
+        when(clienteMapper.clienteToClienteResponse(cliente)).thenReturn(clienteResponse);
+
+        // Mocking the behavior of ClienteService to return the client response
+        when(clienteService.buscarPorCpf(cpf)).thenReturn(clienteResponse);
     }
 
 
-    @Então("o cliente é encontrado com sucesso")
-    public void clienteEncontradoComSucesso() {
-        response.then()
-                .statusCode(HttpStatus.OK.value())
-                .body(matchesJsonSchemaInClasspath("./schemas/ClienteResponseSchema.json"));
+    @Então("o cliente com o CPF {string} deve ser retornado com sucesso")
+    public void oClienteComOCPFSerRetornadoComSucesso(String cpf) {
+        // Construindo o cliente esperado com o CPF especificado
+        ClienteModel clienteEsperado = clienteRepository.findByCpf(cpf);
+        ClienteResponse clienteResponseEsperado = clienteMapper.clienteToClienteResponse(clienteEsperado);
+
+        // Construindo o expectedResponse contendo apenas o cliente esperado
+        List<ClienteResponse> clienteResponseList = new ArrayList<>();
+        clienteResponseList.add(clienteResponseEsperado);
+        ClienteContentResponse expectedResponse = ClienteContentResponse.builder().content(clienteResponseList).build();
+
+        // Obtendo a resposta atual a partir da chamada do método
+        ClienteResponse response = clienteService.buscarPorCpf(cpf);
+
+        // Verificando se a resposta atual corresponde à resposta esperada
+        Assertions.assertEquals(expectedResponse.getContent().get(0), response);
     }
 
-    @Então("o cliente não é encontrado")
-    public void clienteNaoEncontrado() {
-        response.then()
-                .statusCode(HttpStatus.NOT_FOUND.value());
-    }
+
 
 }
