@@ -55,6 +55,6 @@ public class ClienteUseCaseImpl implements ClienteUseCase {
 
     @Override
     public ClienteModel buscarPorId(UUID id) {
-        return buscarPorId(id);
+        return buscarClientePorIdUseCase.buscarPorId(id);
     }
 }
