@@ -30,6 +30,8 @@ class ClienteUseCaseImplTest {
     @Mock
     private SalvarClienteUseCase salvarClienteUseCase;
 
+    @Mock
+    private BuscarClientePorIdUseCase buscarClientePorIdUseCase;
     private ClienteUseCase clienteUseCase;
 
     @BeforeEach
@@ -40,7 +42,8 @@ class ClienteUseCaseImplTest {
                 buscarClientePorCPFUseCase,
                 excluirClienteUseCase,
                 listarClientesUseCase,
-                salvarClienteUseCase
+                salvarClienteUseCase,
+                buscarClientePorIdUseCase
         );
     }
 

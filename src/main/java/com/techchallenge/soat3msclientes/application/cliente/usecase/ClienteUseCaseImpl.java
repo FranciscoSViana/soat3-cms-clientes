@@ -3,6 +3,7 @@ package com.techchallenge.soat3msclientes.application.cliente.usecase;
 import com.techchallenge.soat3msclientes.adapter.cliente.model.ClienteContentResponse;
 import com.techchallenge.soat3msclientes.adapter.cliente.model.ClienteRequest;
 import com.techchallenge.soat3msclientes.adapter.cliente.model.ClienteResponse;
+import com.techchallenge.soat3msclientes.domain.model.ClienteModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,7 @@ public class ClienteUseCaseImpl implements ClienteUseCase {
 
     private final SalvarClienteUseCase salvarClienteUseCase;
 
+    private final BuscarClientePorIdUseCase buscarClientePorIdUseCase;
 
 
     @Override
@@ -49,5 +51,10 @@ public class ClienteUseCaseImpl implements ClienteUseCase {
     @Override
     public ClienteResponse salvar(ClienteRequest clienteRequest) {
         return salvarClienteUseCase.salvar(clienteRequest);
+    }
+
+    @Override
+    public ClienteModel buscarPorId(UUID id) {
+        return buscarPorId(id);
     }
 }

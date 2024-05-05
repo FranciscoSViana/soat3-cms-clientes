@@ -4,6 +4,7 @@ import com.techchallenge.soat3msclientes.adapter.cliente.model.ClienteContentRes
 import com.techchallenge.soat3msclientes.adapter.cliente.model.ClienteRequest;
 import com.techchallenge.soat3msclientes.adapter.cliente.model.ClienteResponse;
 import com.techchallenge.soat3msclientes.application.cliente.usecase.*;
+import com.techchallenge.soat3msclientes.domain.model.ClienteModel;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,14 @@ public class ClienteController {
     public ResponseEntity<ClienteResponse> buscarPorCpf(@PathVariable("cpf") String cpf) {
 
         ClienteResponse response = clienteUseCase.buscarPorCpf(cpf);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<ClienteModel> buscarPorCpf(@PathVariable("id") UUID id) {
+
+        ClienteModel response = clienteUseCase.buscarPorId(id);
 
         return ResponseEntity.ok(response);
     }
