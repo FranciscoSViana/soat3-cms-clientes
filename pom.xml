@@ -152,7 +152,12 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.1.2</version>
 				<configuration>
-					<argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+					<!--suppress UnresolvedMavenProperty -->
+					<argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true ${argLine}</argLine>
+					<includes>
+						<include>**/*Tests.java</include>
+						<include>**/*Test.java</include>
+					</includes>
 					<excludes>
 						<exclude>**/bdd/**</exclude>
 					</excludes>
@@ -197,5 +202,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
