@@ -154,7 +154,6 @@
 				<configuration>
 					<!--suppress UnresolvedMavenProperty -->
 					<argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true ${argLine}</argLine>
-					<classpath>${project.basedir}/target/classes</classpath>
 					<includes>
 						<include>**/*Tests.java</include>
 						<include>**/*Test.java</include>
