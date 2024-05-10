@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class ClienteFactoryTest {
+class ClienteFactoryTest {
 
     private ClienteFactory clienteFactory;
     private DataProvider dataProvider;

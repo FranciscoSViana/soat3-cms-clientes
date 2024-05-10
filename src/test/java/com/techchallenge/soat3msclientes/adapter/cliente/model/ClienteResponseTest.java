@@ -116,7 +116,7 @@ class ClienteResponseTest {
         assertNotEquals(clienteResponse1, clienteResponse3);
         assertNotEquals(clienteResponse2, clienteResponse3);
 
-        assertNotEquals(clienteResponse1, null);
+        assertNotEquals(null, clienteResponse1);
 
         assertNotEquals(clienteResponse1, new Object());
 

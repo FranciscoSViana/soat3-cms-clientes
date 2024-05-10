@@ -16,13 +16,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Sql(scripts = "/data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-public class ClienteRepositoryIT {
+class ClienteRepositoryIT {
 
     @Autowired
     private ClienteRepository clienteRepository;
 
     @Test
-    public void testFindByCpf() {
+    void testFindByCpf() {
 
         UUID uuid = UUID.fromString("0a2f5e67-8b3d-4c6a-a1b2-987654321000");
 
@@ -44,14 +44,14 @@ public class ClienteRepositoryIT {
         assertEquals("Maria Santos", foundCliente.getNome());
     }
     @Test
-    public void testFindByCpfFile() {
+    void testFindByCpfFile() {
         ClienteModel cliente = clienteRepository.findByCpf("12312312387");
 
         assertEquals("João Silva", cliente.getNome());
     }
 
     @Test
-    public void testFindById() {
+    void testFindById() {
         String uuidJoaoSilva = "5a39b3b5-4675-4c67-8dcb-3e59e38e36c1";
 
         Optional<ClienteModel> clienteOptional = clienteRepository.findById(UUID.fromString(uuidJoaoSilva));

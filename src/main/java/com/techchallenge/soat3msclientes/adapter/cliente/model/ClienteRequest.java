@@ -1,12 +1,7 @@
 package com.techchallenge.soat3msclientes.adapter.cliente.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.Objects;
 import java.util.UUID;
 
 @Getter
@@ -14,6 +9,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class ClienteRequest {
 
     private UUID id;
@@ -21,17 +17,4 @@ public class ClienteRequest {
     private String cpf;
     private String email;
     private String telefone;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ClienteRequest that = (ClienteRequest) o;
-        return Objects.equals(id, that.id) && Objects.equals(cpf, that.cpf);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, cpf);
-    }
 }

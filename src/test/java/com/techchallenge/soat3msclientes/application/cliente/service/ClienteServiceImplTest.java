@@ -24,7 +24,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class ClienteServiceImplTest {
+class ClienteServiceImplTest {
 
     @Mock
     private ClienteRepository clienteRepository;
