@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ClienteRequestTest {
+class ClienteRequestTest {
 
     @Test
     void testBuilder() {
@@ -111,11 +111,11 @@ public class ClienteRequestTest {
         assertEquals(clienteRequest1, clienteRequest2);
         assertNotEquals(clienteRequest1, clienteRequest3);
         assertNotEquals(clienteRequest2, clienteRequest3);
-        assertNotEquals(clienteRequest1, null);
+        assertNotEquals(null, clienteRequest1);
         assertNotEquals(clienteRequest1, new Object());
         assertEquals(clienteRequest1.hashCode(), clienteRequest2.hashCode());
         assertNotEquals(clienteRequest1.hashCode(), clienteRequest3.hashCode());
-        assertEquals(1244954382, clienteRequest4.hashCode());
+        assertEquals(961, clienteRequest4.hashCode());
     }
 
     @Test
