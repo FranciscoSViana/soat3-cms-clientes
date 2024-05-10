@@ -1,6 +1,5 @@
-package com.techchallenge.soat3msclientes.domian.model;
+package com.techchallenge.soat3msclientes.domain.model;
 
-import com.techchallenge.soat3msclientes.domain.model.ClienteModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -10,8 +9,9 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ClienteModelTest {
+class ClienteModelTest {
 
     @Mock
     private ClienteModel clienteModel;
@@ -74,6 +74,6 @@ public class ClienteModelTest {
     @Test
     void testSituacao() {
         clienteModel.setSituacao(true);
-        assertEquals(true, clienteModel.isSituacao());
+        assertTrue(clienteModel.isSituacao());
     }
 }

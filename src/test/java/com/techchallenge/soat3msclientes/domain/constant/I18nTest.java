@@ -1,5 +1,4 @@
-package com.techchallenge.soat3msclientes.domian.constant;
-import com.techchallenge.soat3msclientes.domain.constant.I18n;
+package com.techchallenge.soat3msclientes.domain.constant;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
