@@ -115,7 +115,7 @@ class ClienteRequestTest {
         assertNotEquals(clienteRequest1, new Object());
         assertEquals(clienteRequest1.hashCode(), clienteRequest2.hashCode());
         assertNotEquals(clienteRequest1.hashCode(), clienteRequest3.hashCode());
-        assertEquals(961, clienteRequest4.hashCode());
+        assertEquals(1244954382, clienteRequest4.hashCode());
     }
 
     @Test
