@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: mysql-clientes-container
-          image: mysql
+          image: mysql:8.3.0
           ports:
             - containerPort: 3307
           envFrom:
@@ -46,9 +46,11 @@ kind: Service
 metadata:
   name: mysql-clientes-service
 spec:
+  type: NodePort
   ports:
     - protocol: TCP
       port: 3307
       targetPort: 3307
+      nodePort: 32001
   selector:
     app: mysql-clientes
