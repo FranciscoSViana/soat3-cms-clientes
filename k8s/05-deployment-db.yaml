@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-clientes
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      name: mysql-clientes
+      labels:
+        app: mysql-clientes
+    spec:
+      containers:
+        - name: mysql-clientes-container
+          image: mysql
+          ports:
+            - containerPort: 3307
+          envFrom:
+            - configMapRef:
+                name: clientes-config
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-clientes-secret
+                  key: db_root_password
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-clientes-secret
+                  key: db_user
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-clientes-secret
+                  key: db_password
+            - name: MYSQL_TCP_PORT
+              value: "3307"
+  selector:
+    matchLabels:
+      app: mysql-clientes
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-clientes-service
+spec:
+  ports:
+    - protocol: TCP
+      port: 3307
+      targetPort: 3307
+  selector:
+    app: mysql-clientes
