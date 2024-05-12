@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: clientes-config
 data:
-  db_host: "dbc:mysql://mysql-clientes-service:3307/soat3?&createDatabaseIfNotExist=true"
+  db_host: "jdbc:mysql://mysql-clientes-service/soat3?&createDatabaseIfNotExist=true"
   MYSQL_DATABASE: "soat3"
