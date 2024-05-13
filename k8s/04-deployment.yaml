@@ -18,8 +18,6 @@ spec:
           ports:
             - containerPort: 8080
           env:
-            - name: EUREKA_HOST
-              value: "http://soat3-ms-eureka-service:32002/eureka/"
             - name: DB_HOST
               valueFrom:
                 configMapKeyRef:
