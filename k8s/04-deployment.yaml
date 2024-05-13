@@ -19,10 +19,7 @@ spec:
             - containerPort: 8080
           env:
             - name: EUREKA_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: clientes-config
-                  key: EUREKA_HOST
+              value: "http://soat3-ms-eureka-service:32002/eureka/"
             - name: DB_HOST
               valueFrom:
                 configMapKeyRef:
@@ -54,7 +51,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: soat3-ms-clientes
+  name: soat3-ms-clientes-service
 spec:
   type: NodePort
   selector:

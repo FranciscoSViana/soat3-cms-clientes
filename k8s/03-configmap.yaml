@@ -5,4 +5,4 @@ metadata:
 data:
   db_host: "jdbc:mysql://mysql-clientes-service:3307/soat3?&createDatabaseIfNotExist=true"
   MYSQL_DATABASE: "soat3"
-  EUREKA_HOST: "soat3-ms-eureka"
+  EUREKA_HOST: "http://soat3-ms-eureka-service:32002/eureka/"
