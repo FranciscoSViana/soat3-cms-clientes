@@ -58,4 +58,4 @@ spec:
   ports:
     - protocol: TCP
       port: 8080
-      nodePort: 32002
+      nodePort: 32001
