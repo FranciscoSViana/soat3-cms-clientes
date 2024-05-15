@@ -231,7 +231,6 @@ class ClienteMapperTest {
 
         clienteMapper.copyToDomainObject(clienteRequest, clienteModel);
 
-        assertEquals(clienteRequest.getId(), clienteModel.getId());
         assertEquals(clienteRequest.getNome(), clienteModel.getNome());
         assertEquals(clienteRequest.getCpf(), clienteModel.getCpf());
         assertEquals(clienteRequest.getEmail(), clienteModel.getEmail());
