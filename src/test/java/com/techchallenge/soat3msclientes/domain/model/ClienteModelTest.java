@@ -8,8 +8,7 @@ import org.mockito.MockitoAnnotations;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ClienteModelTest {
 
@@ -75,5 +74,39 @@ class ClienteModelTest {
     void testSituacao() {
         clienteModel.setSituacao(true);
         assertTrue(clienteModel.isSituacao());
+    }
+
+    @Test
+    void testEquals() {
+        UUID id = UUID.randomUUID();
+        ClienteModel cliente1 = new ClienteModel(id, "Cliente 1", "12345678901", "cliente1@example.com", "123456789", LocalDateTime.now(), LocalDateTime.now(), true);
+        ClienteModel cliente2 = new ClienteModel(id, "Cliente 2", "98765432109", "cliente2@example.com", "987654321", LocalDateTime.now(), LocalDateTime.now(), false);
+
+        assertTrue(cliente1.equals(cliente2));
+    }
+
+    @Test
+    void testNotEquals() {
+        ClienteModel cliente1 = new ClienteModel(UUID.randomUUID(), "Cliente 1", "12345678901", "cliente1@example.com", "123456789", LocalDateTime.now(), LocalDateTime.now(), true);
+        ClienteModel cliente2 = new ClienteModel(UUID.randomUUID(), "Cliente 2", "98765432109", "cliente2@example.com", "987654321", LocalDateTime.now(), LocalDateTime.now(), false);
+
+        assertFalse(cliente1.equals(cliente2));
+    }
+
+    @Test
+    void testHashCode() {
+        UUID id = UUID.randomUUID();
+        ClienteModel cliente1 = new ClienteModel(id, "Cliente 1", "12345678901", "cliente1@example.com", "123456789", LocalDateTime.now(), LocalDateTime.now(), true);
+        ClienteModel cliente2 = new ClienteModel(id, "Cliente 2", "98765432109", "cliente2@example.com", "987654321", LocalDateTime.now(), LocalDateTime.now(), false);
+
+        assertEquals(cliente1.hashCode(), cliente2.hashCode());
+    }
+
+    @Test
+    void testNotHashCode() {
+        ClienteModel cliente1 = new ClienteModel(UUID.randomUUID(), "Cliente 1", "12345678901", "cliente1@example.com", "123456789", LocalDateTime.now(), LocalDateTime.now(), true);
+        ClienteModel cliente2 = new ClienteModel(UUID.randomUUID(), "Cliente 2", "98765432109", "cliente2@example.com", "987654321", LocalDateTime.now(), LocalDateTime.now(), false);
+
+        assertNotEquals(cliente1.hashCode(), cliente2.hashCode());
     }
 }
