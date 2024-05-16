@@ -3,9 +3,7 @@ package com.techchallenge.soat3msclientes;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-//@EnableFeignClients
 @SpringBootApplication
-//@EnableDiscoveryClient
 public class Soat3MsClientesApplication {
 
 	//public static final String PACKAGE = "com.techchallenge.soat3msclientes";
