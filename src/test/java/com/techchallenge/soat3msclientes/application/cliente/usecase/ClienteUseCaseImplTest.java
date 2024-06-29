@@ -32,7 +32,12 @@ class ClienteUseCaseImplTest {
 
     @Mock
     private BuscarClientePorIdUseCase buscarClientePorIdUseCase;
+
+    @Mock
+    private InativarClienteUseCase inativarClienteUseCase;
+
     private ClienteUseCase clienteUseCase;
+
 
     @BeforeEach
     void setUp() {
@@ -43,7 +48,8 @@ class ClienteUseCaseImplTest {
                 excluirClienteUseCase,
                 listarClientesUseCase,
                 salvarClienteUseCase,
-                buscarClientePorIdUseCase
+                buscarClientePorIdUseCase,
+                inativarClienteUseCase
         );
     }
 

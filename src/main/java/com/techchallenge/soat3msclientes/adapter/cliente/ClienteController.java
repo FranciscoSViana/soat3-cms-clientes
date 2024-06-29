@@ -67,5 +67,10 @@ public class ClienteController {
         clienteUseCase.excluirCliente(clienteId);
     }
 
+    @DeleteMapping("/{clienteId}/inativacao")
+    public void inativacao(@PathVariable UUID clienteId) {
+        clienteUseCase.inativacao(clienteId);
+    }
+
 
 }
