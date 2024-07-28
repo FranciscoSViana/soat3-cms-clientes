@@ -1,4 +1,5 @@
 package com.techchallenge.soat3msclientes.application.cliente.converter;
+
 import com.techchallenge.soat3msclientes.adapter.cliente.model.ClienteRequest;
 import com.techchallenge.soat3msclientes.adapter.cliente.model.ClienteResponse;
 import com.techchallenge.soat3msclientes.domain.model.ClienteModel;
@@ -33,13 +34,7 @@ class ClienteMapperTest {
         String email = "joao@example.com";
         String telefone = "123456789";
 
-        ClienteRequest clienteRequest = ClienteRequest.builder()
-                .id(uuid)
-                .nome(nome)
-                .cpf(cpf)
-                .email(email)
-                .telefone(telefone)
-                .build();
+        ClienteRequest clienteRequest = ClienteRequest.builder().id(uuid).nome(nome).cpf(cpf).email(email).telefone(telefone).build();
 
         ClienteModel clienteModel = clienteMapper.clienteInputToCliente(clienteRequest);
 
@@ -60,13 +55,7 @@ class ClienteMapperTest {
         String email = "joao@example.com";
         String telefone = "123456789";
 
-        ClienteModel clienteModel = ClienteModel.builder()
-                .id(uuid)
-                .nome(nome)
-                .cpf(cpf)
-                .email(email)
-                .telefone(telefone)
-                .build();
+        ClienteModel clienteModel = ClienteModel.builder().id(uuid).nome(nome).cpf(cpf).email(email).telefone(telefone).build();
 
         ClienteResponse clienteResponse = clienteMapper.clienteToClienteModel(clienteModel);
 
@@ -85,13 +74,7 @@ class ClienteMapperTest {
         String email = "joao@example.com";
         String telefone = "123456789";
 
-        ClienteModel clienteModel = ClienteModel.builder()
-                .id(uuid)
-                .nome(nome)
-                .cpf(cpf)
-                .email(email)
-                .telefone(telefone)
-                .build();
+        ClienteModel clienteModel = ClienteModel.builder().id(uuid).nome(nome).cpf(cpf).email(email).telefone(telefone).build();
 
         ClienteResponse clienteResponse = clienteMapper.clienteToClienteResponse(clienteModel);
 
@@ -117,20 +100,8 @@ class ClienteMapperTest {
         String telefone1 = "123456789";
         String telefone2 = "987654321";
 
-        clienteModels.add(ClienteModel.builder()
-                .id(uuid1)
-                .nome(nome1)
-                .cpf(cpf1)
-                .email(email1)
-                .telefone(telefone1)
-                .build());
-        clienteModels.add(ClienteModel.builder()
-                .id(uuid2)
-                .nome(nome2)
-                .cpf(cpf2)
-                .email(email2)
-                .telefone(telefone2)
-                .build());
+        clienteModels.add(ClienteModel.builder().id(uuid1).nome(nome1).cpf(cpf1).email(email1).telefone(telefone1).build());
+        clienteModels.add(ClienteModel.builder().id(uuid2).nome(nome2).cpf(cpf2).email(email2).telefone(telefone2).build());
 
         List<ClienteResponse> clienteResponses = clienteMapper.getClientes(clienteModels);
 
@@ -165,40 +136,18 @@ class ClienteMapperTest {
         String telefone1 = "123456789";
         String telefone2 = "987654321";
 
-        clienteModels.add(ClienteModel.builder()
-                .id(uuid1)
-                .nome(nome1)
-                .cpf(cpf1)
-                .email(email1)
-                .telefone(telefone1)
-                .build());
-        clienteModels.add(ClienteModel.builder()
-                .id(uuid2)
-                .nome(nome2)
-                .cpf(cpf2)
-                .email(email2)
-                .telefone(telefone2)
-                .build());
+        clienteModels.add(ClienteModel.builder().id(uuid1).nome(nome1).cpf(cpf1).email(email1).telefone(telefone1).build());
+        clienteModels.add(ClienteModel.builder().id(uuid2).nome(nome2).cpf(cpf2).email(email2).telefone(telefone2).build());
 
         Collection<ClienteResponse> clienteResponses = clienteMapper.clientesToClientesModel(clienteModels);
 
         assertEquals(2, clienteResponses.size());
 
-        List<UUID> uuids = clienteResponses.stream()
-                .map(ClienteResponse::getId)
-                .collect(Collectors.toList());
-        List<String> nomes = clienteResponses.stream()
-                .map(ClienteResponse::getNome)
-                .collect(Collectors.toList());
-        List<String> cpfs = clienteResponses.stream()
-                .map(ClienteResponse::getCpf)
-                .collect(Collectors.toList());
-        List<String> emails = clienteResponses.stream()
-                .map(ClienteResponse::getEmail)
-                .collect(Collectors.toList());
-        List<String> telefones = clienteResponses.stream()
-                .map(ClienteResponse::getTelefone)
-                .collect(Collectors.toList());
+        List<UUID> uuids = clienteResponses.stream().map(ClienteResponse::getId).collect(Collectors.toList());
+        List<String> nomes = clienteResponses.stream().map(ClienteResponse::getNome).collect(Collectors.toList());
+        List<String> cpfs = clienteResponses.stream().map(ClienteResponse::getCpf).collect(Collectors.toList());
+        List<String> emails = clienteResponses.stream().map(ClienteResponse::getEmail).collect(Collectors.toList());
+        List<String> telefones = clienteResponses.stream().map(ClienteResponse::getTelefone).collect(Collectors.toList());
 
         assertEquals(uuid1, uuids.get(0));
         assertEquals(uuid2, uuids.get(1));
@@ -219,13 +168,7 @@ class ClienteMapperTest {
 
     @Test
     void testCopyToDomainObject() {
-        ClienteRequest clienteRequest = ClienteRequest.builder()
-                .id(UUID.randomUUID())
-                .nome("João")
-                .cpf("12345678901")
-                .email("joao@example.com")
-                .telefone("123456789")
-                .build();
+        ClienteRequest clienteRequest = ClienteRequest.builder().id(UUID.randomUUID()).nome("João").cpf("12345678901").email("joao@example.com").telefone("123456789").build();
 
         ClienteModel clienteModel = ClienteModel.builder().build();
 
@@ -262,7 +205,6 @@ class ClienteMapperTest {
         when(clienteModel.getId()).thenThrow(RuntimeException.class); // Simulate an invalid mapping
         assertThrows(RuntimeException.class, () -> clienteMapper.clienteToClienteModel(clienteModel));
     }
-
 
 
 }

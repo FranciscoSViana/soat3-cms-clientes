@@ -27,6 +27,8 @@ public class ClienteUseCaseImpl implements ClienteUseCase {
 
     private final BuscarClientePorIdUseCase buscarClientePorIdUseCase;
 
+    private final InativarClienteUseCase inativarClienteUseCase;
+
 
     @Override
     public ClienteResponse atualizar(UUID clienteId, ClienteRequest clienteRequest) {
@@ -56,5 +58,12 @@ public class ClienteUseCaseImpl implements ClienteUseCase {
     @Override
     public ClienteModel buscarPorId(UUID id) {
         return buscarClientePorIdUseCase.buscarPorId(id);
+    }
+
+    @Override
+    public ClienteResponse inativacao(UUID id) {
+        ClienteModel clienteModel = this.buscarPorId(id);
+        clienteModel.setSituacao(false);
+        return inativarClienteUseCase.inativar(clienteModel);
     }
 }

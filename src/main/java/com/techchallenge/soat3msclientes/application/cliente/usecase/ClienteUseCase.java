@@ -14,4 +14,5 @@ public interface ClienteUseCase {
     ClienteContentResponse buscarTodos();
     ClienteResponse salvar(ClienteRequest clienteRequest);
     ClienteModel buscarPorId(UUID id);
+    ClienteResponse inativacao(UUID id);
 }

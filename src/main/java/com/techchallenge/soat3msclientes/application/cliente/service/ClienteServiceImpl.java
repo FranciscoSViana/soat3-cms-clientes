@@ -94,4 +94,10 @@ public class ClienteServiceImpl implements ClienteService {
                 }
         );
     }
+
+    @Override
+    public ClienteResponse inativacao(ClienteModel clienteModel) {
+        ClienteModel newCliente = clienteRepository.save(clienteModel);
+        return clienteMapper.clienteToClienteResponse(clienteModel);
+    }
 }

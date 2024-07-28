@@ -20,5 +20,5 @@ public interface ClienteService {
 
     void excluirCliente(UUID clienteId);
 
-
+    ClienteResponse inativacao(ClienteModel clienteModel);
 }
